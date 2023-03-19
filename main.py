@@ -48,12 +48,15 @@ def decorater1(data1, data2):
     return clearance
 
 
-async def dbH(data1, data2):
+async def dbH(data1, data2, **data3):
     if data1 == "get":
         end = []
         for i in db[data2]:
             end.append(i)
         return end
+    if data2 == "set":
+        for i,j in data3:
+            db[i] = j
 
 async def cClr(data1, data2):
     if data2 in clr[data1]: return True
@@ -70,8 +73,6 @@ async def on_ready():
 
 @client.event
 async def on_message(msg):
-    global debugMode
-
     if msg.author == client.user: return
 
     split = str.split(msg.content, " ")
@@ -116,7 +117,7 @@ async def on_message(msg):
 
     if split[0] == "playing":
         if await check(msg) == False: return
-        await msg.channel.send(await dbH("get", "active"))
+        await msg.channel.send(await dbH("get", "active", None))
 
     if split[0] == "name":
         if await check(msg) == False: return
