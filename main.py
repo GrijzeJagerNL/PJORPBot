@@ -54,6 +54,10 @@ async def dbH(data1, data2, **data3):
         for i in db[data2]:
             end.append(i)
         return end
+    if data1 == "check":
+        for i,n in data3:
+            if db[i] != j: return False
+        return: True
     if data2 == "set":
         for i,j in data3:
             db[i] = j
