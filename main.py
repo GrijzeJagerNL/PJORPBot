@@ -43,6 +43,7 @@ client = discord.Client(intents=discord.Intents.all())
 
 def decorater1(data1, data2):
     def clearance(func):
+        if data1 == None: func()
         if data2.author.id not in clr[data1]: return
         func()
     return clearance
